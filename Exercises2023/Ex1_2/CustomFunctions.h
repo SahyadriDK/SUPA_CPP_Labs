@@ -1,3 +1,6 @@
+// Author: Sahyadri Krishna
+// Email: sk322@st-andrews.ac.uk
+
 #pragma once
 #include <iostream>
 #include <fstream>
