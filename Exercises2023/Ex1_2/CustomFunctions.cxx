@@ -70,7 +70,7 @@ std::vector<double> calculate_magnitude(std::vector<std::string> x, std::vector<
 
 // Want to calculate the best-fit line given a set of (x,y)
 // Return: m (slope) and c (intercept)
-void FitLine(std::vector<std::string>x, std::vector<std::string>y){
+std::string FitLine(std::vector<std::string>x, std::vector<std::string>y){
     
     int N = x.size(); // Length of the vectors
     double m, c;
@@ -95,9 +95,6 @@ void FitLine(std::vector<std::string>x, std::vector<std::string>y){
     m = ((N * sum_xy) - (sum_x * sum_y)) / ((N * sum_xx) - (sum_x * sum_x));
     c = ((sum_xx * sum_y) - (sum_xy * sum_x)) / ((N * sum_xx) - (sum_x * sum_x));
 
-    // Print out the equation
-    std::cout << "The least square fit line is y = " << m << "x + " << c << std::endl;
-
     // Read the error file
     std::string err_file = "Exercises2023/Ex1_2/error2D_float.txt";
     std::vector<std::string> err_x, err_y;
@@ -118,8 +115,10 @@ void FitLine(std::vector<std::string>x, std::vector<std::string>y){
     chi_sq /= Ndf; // Division by DoF.
 
     // Print out the the chi_sq
-    std::cout << "The reduced chisquared for the fit is " << chi_sq << std::endl;
-
+    std::string out_string;
+    out_string = "The least square fit line is y = " + std::to_string(m) + "x + " + std::to_string(c) + ". The reduced chisquared for the fit is " + std::to_string(chi_sq);
+    
+    return out_string;
 
 }
 
@@ -160,4 +159,41 @@ int calcExpArr(std::vector<std::string> x, std::vector<std::string> y, std::vect
     
     return calcExpArr(x, y, exp_arr, i+1); // Repeat calculation till you reach the end
 
+}
+
+// Create a function to store the outputs into a text file.
+// Function 1: Input uses two vectors
+void save_file(std::vector<std::string> x, std::vector<std::string> y, std::string filename){
+    
+    std::ofstream myOutput; // Load ofstream variable
+    myOutput.open(filename); // Open said file
+
+    for (int i=0; i<x.size(); i++){
+        myOutput << x[i] << "," << y[i] << std::endl;
+    }
+    myOutput.close(); // Close writing of file
+
+}
+
+// Function 2: Input uses a single vector
+void save_file(std::vector<double> x, std::string filename){
+
+    std::ofstream myOutput; // Load ofstream variable
+    myOutput.open(filename); // Open said file
+
+    for (int i=0; i<x.size(); i++){
+        myOutput << x[i] << std::endl;
+    }
+    myOutput.close(); // Close writing of file
+
+}
+
+// Function 3: Specifically only for y=mx+c.
+void save_file(std::string data_string, std::string filename){
+    
+    std::ofstream myOutput;
+    myOutput.open(filename);
+
+    myOutput << data_string << std::endl;
+    myOutput.close();
 }

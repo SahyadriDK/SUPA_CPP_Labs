@@ -1,0 +1,1 @@
+The least square fit line is y = 0.126266x + 2.026278. The reduced chisquared for the fit is 34401.923799
