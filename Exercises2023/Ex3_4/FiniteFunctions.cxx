@@ -137,15 +137,15 @@ std::vector<double> FiniteFunction::metro_sample(int n_random){
     y = normalPDF(mtEngine);
     f_y = this->callFunction(y); // PROBLEM IS HERE
     f_x = this->callFunction(x_init); // PROBLEM IS HERE
-    if (f_y/f_x < 1){
+    if (f_y/f_x < 1){ // Keep the minimum of (f_y/f_x, 1)
       A = f_y/f_x;
     }
     else{
-      A = 1;
+      A = 1; 
     }
     T = uniformPDF2(mtEngine);
     if (T < A){
-      x_init = y;
+      x_init = y; // Change xi to y if T < A, else keep as is.
     }
 
     // Append the newly generated random numbers to vector
@@ -154,7 +154,6 @@ std::vector<double> FiniteFunction::metro_sample(int n_random){
   }
 
   return sampled_data;
-  //this->callFunction(1.0);
 }
 
 

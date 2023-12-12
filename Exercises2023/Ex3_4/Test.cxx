@@ -28,13 +28,13 @@ int main(){
     std::vector<double> x2;
     double xmin = -5.0;
     double xmax = 5.0;
-    std::string outName = "FiniteFunction";
+    std::string outName = "FiniteFunction"; // Name for the resultant plot
 
     FiniteFunction finite(xmin, xmax, outName);
-    x2 = finite.metro_sample(10000);
-    finite.plotData(x2, 40, false);
-    finite.plotData(x, 40, true);
-    finite.plotFunction();
+    x2 = finite.metro_sample(10000); // Sample data from the inverse-square function.
+    finite.plotData(x2, 40, false); // Plot the binned sampled data.
+    finite.plotData(x, 40, true); // Plot the mystery data.
+    finite.plotFunction(); // Plot the function.
 
 
     // Create an instance of NormalDistribution.
@@ -49,7 +49,7 @@ int main(){
     normal.plotData(x2, 40, false); // Plot binned sample data
     normal.plotData(x, 40, true); // Plot binned mystery data.
     normal.plotFunction(); // Plot the normal distribution for the given mean and sigma.
-    //normal.printPars();
+    normal.printPars();
 
 
     // Create an instance of CauchyDistribution.
@@ -65,7 +65,7 @@ int main(){
     cDist.plotData(x2, 40, false); // Plot binned sample data
     cDist.plotData(x, 40, true); // Plot binned mystery data
     cDist.plotFunction(); // Plot the Cauchy distribution
-    //cDist.printPars();
+    cDist.printPars();
 
 
     // Create an instance of Negative Crystal Ball distribution
